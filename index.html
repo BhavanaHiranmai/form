@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <title>form</title>
+  </head>
+  <body>
+    <script>
+      const Name = () => {
+        const name = document.getElementById("name").value;
+        // console.log(name.value);
+        p = document.getElementById("a");
+        let hasNumeric = false;
+        let hasSpecial = false;
+
+        for (let i = 0; i < name.length; i++) {
+          let char = name[i];
+
+          if ((char >= "A" && char <= "Z") || (char >= "a" && char <= "z")) {
+            continue;
+          }
+
+          if (char >= "0" && char <= "9") {
+            hasNumeric = true;
+            break;
+          } else {
+            hasSpecial = true;
+            break;
+          }
+        }
+
+        if (hasNumeric || hasSpecial || name.length < 3) {
+          p.innerText =
+            "name has atleast 3 characters no special symbols and no numeric";
+        } else {
+          p.innerText = "";
+        }
+      };
+      const Email = () => {
+        const email = document.getElementById("email").value;
+        const p = document.getElementById("b");
+        if (email == "") {
+          p.innerText = "";
+        }
+
+        const parts = email.split("@");
+
+        if (
+          parts.length !== 2 ||
+          !parts[1].includes(".") ||
+          parts[1].startsWith(".") ||
+          parts[1].endsWith(".")
+        ) {
+          p.innerText = "Enter a valid email";
+        } else {
+          p.innerText = "";
+        }
+      };
+      const Password = () => {
+        const pass = document.getElementById("password").value;
+        const p = document.getElementById("c");
+
+        if (pass === "") {
+          p.innerText = "";
+          return;
+        }
+
+        let hasUpper = false;
+        let hasLower = false;
+        let hasNumber = false;
+        let hasSpecial = false;
+
+        for (let i = 0; i < pass.length; i++) {
+          const ch = pass[i];
+
+          if (ch >= "A" && ch <= "Z") hasUpper = true;
+          else if (ch >= "a" && ch <= "z") hasLower = true;
+          else if (ch >= "0" && ch <= "9") hasNumber = true;
+          else hasSpecial = true;
+        }
+
+        if (
+          pass.length < 8 ||
+          !hasUpper ||
+          !hasLower ||
+          !hasNumber ||
+          !hasSpecial
+        ) {
+          p.innerText =
+            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character";
+          return;
+        }
+
+        p.innerText = "";
+      };
+      const Phone = () => {
+        const phone = document.getElementById("phone").value;
+        const p = document.getElementById("d");
+        if (phone.length != 10) {
+          p.innerText = "Enter a valid phone numeber";
+          return;
+        }
+        for (let i = 0; i < phone.length; i++) {
+          const ch = phone[i];
+          if (!(ch >= 0 && ch <= 9)) {
+            p.innerText = "Enter a valid phone number";
+            return;
+          }
+        }
+
+        p.innerText = "";
+      };
+    </script>
+
+    <div class="Form">
+      <div>
+        <center>Form</center>
+        <form action="">
+          <label>user name</label>
+          <input type="text" name="name" id="name" onchange="Name()" />
+          <p id="a"></p>
+          <label>Email</label>
+          <input type="email" name="email" id="email" onchange="Email()" />
+          <p id="b"></p>
+          <label for="">password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onchange="Password()"
+          />
+          <p id="c"></p>
+          <label for="">phone number</label>
+          <input type="text" name="phone" id="phone" onchange="Phone()" />
+          <p id="d"></p>
+          <label for="">date</label>
+          <input type="date" name="date" id="date" />
+          <!-- <button>submit</button> -->
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
